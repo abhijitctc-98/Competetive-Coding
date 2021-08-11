@@ -77,3 +77,42 @@ class Solution {
     return water;
   }
 }
+
+/*
+The 3rd approach for solving this particular problem is using 2 pointer approach.
+Using this approach, the problem boils down into a simpler format.
+And it requires a time complexity of O(n).
+And an additional space complexity of O(1).
+*/
+
+class Solution {
+  public int trap(int[] height) {
+    int water = 0;
+    if((height == null) || (height.length == 0)) {
+      return water;
+    }
+    int leftMax = 0;
+    int rightMax = 0;
+    
+    int l = 0;
+    int r = 0;
+    while(l <= r) {
+      if(height[l] <= height[r]) {
+          if(height[l] >= leftMax) {
+            leftMax = height[l];
+          } else {
+            water += (leftMax - height[l]);
+            l++;
+          }
+      } else {
+          if(height[r] >= rightMax) {
+            rightMax = height[r];
+          } else {
+            water += (rightMax - height[r]);
+            r--;
+          }
+      }
+    }
+    return water;
+  }
+}
